@@ -14,9 +14,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  
 
-  double opacity = 0;
+  double opacity = 0.8;
+
   late TextStyle _titleStyle;
   late TextStyle _textStyle;
   late TextStyle _subtextStyle;
@@ -25,18 +25,30 @@ class _HomeState extends State<Home> {
 
   late ScrollController _scScroll;
 
+  late Size size;
+
+  late double _homeOffSet;
+  late double _benefitsOffSet;
+  late double _statsOffSet;
+  late double _downloadOffSet;
+
   @override
   Widget build(BuildContext context) {
 
-    final size = MediaQuery.of(context).size;
+    size = MediaQuery.of(context).size;
+
+    _homeOffSet = 0;
+    _benefitsOffSet = 0;
+    _statsOffSet = 0;
+    _downloadOffSet = 0;
 
     _titleStyle = GoogleFonts.permanentMarker(
-      fontSize: (size.width>500)?140:100,
+      fontSize: (size.width>1000)?200:(size.width>500)?130:100,
       color: Colors.white,
     );
 
     _textStyle = GoogleFonts.robotoCondensed(
-      fontSize: (size.width>500)?30:14,
+      fontSize: (size.width>500)?40:15,
       color: Colors.white,
     );
 
@@ -46,10 +58,10 @@ class _HomeState extends State<Home> {
     );
 
     _list = <Widget>[
-      _home(context),
-      _benefits(context),
-      _stats(context),
-      _download(context)
+      _home(),
+      _benefits(),
+      _stats(),
+      _download()
     ];
 
     _scScroll = ScrollController();
@@ -66,34 +78,29 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          _page(context),
-          _menu(context),
+          _page(),
+          _menu(),
           
         ],
       ),
     );
   }
 
-  Widget _menu(BuildContext context){
+  Widget _menu(){
 
-    final size = MediaQuery.of(context).size;
-
-    return Expanded(
-      child: Container(
-        color: Color.fromRGBO(44, 47, 51, opacity),
-        height: size.height*.1,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            // const Image(image: AssetImage("Files/DarkTheme.png")), 
-            TextButton(onPressed: () => _scroll(size.height*0), child: Text("Inicio", style: _textStyle)),
-            TextButton(onPressed: () => _scroll(size.height*1), child: Text("Beneficios", style: _textStyle)),
-            TextButton(onPressed: () => _scroll(size.height*2), child: Text("Estadisticas", style: _textStyle)),
-            TextButton(onPressed: () => _scroll(size.height*3), child: Text("Descargas", style: _textStyle)),
-            TextButton(onPressed: () {}, child: Icon(Icons.language, color: Colors.white, size: (size.width>500)?40:14,)),
-          ],
-        ),
-      )
+    return Container(
+      color: Color.fromRGBO(44, 47, 51, opacity),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          // const Image(image: AssetImage("Files/DarkTheme.png")), 
+          TextButton(onPressed: () => _scroll(_homeOffSet), child: Text("Inicio", style: _textStyle)),
+          TextButton(onPressed: () => _scroll(_benefitsOffSet), child: Text("Beneficios", style: _textStyle)),
+          TextButton(onPressed: () => _scroll(_statsOffSet), child: Text("Estadisticas", style: _textStyle)),
+          TextButton(onPressed: () => _scroll(_downloadOffSet), child: Text("Descargas", style: _textStyle)),
+          TextButton(onPressed: () {}, child: Icon(Icons.language, color: Colors.white, size: (size.width>500)?40:15,)),
+        ],
+      ),
     );
   }
 
@@ -102,25 +109,28 @@ class _HomeState extends State<Home> {
       // scScroll.jumpTo(index);//teleport hasta la ubicacion, sin animacion, sin importar si hay otro scroll en proceso
   }
 
-  Widget _page(BuildContext context){
-    return Expanded(
-      child: ListView.builder(
-        controller: _scScroll,
-        itemCount: _list.length,
-        itemBuilder: (context, index) {
-          return _list[index];
-        }
-      )
+  Widget _page(){
+    return ListView.builder(
+      controller: _scScroll,
+      itemCount: _list.length,
+      itemBuilder: (context, index) {
+        return _list[index];
+      }
     );
   }
 
-  Widget _home(BuildContext context){
+  Widget _home(){
 
-    final size = MediaQuery.of(context).size;
+    _benefitsOffSet = _homeOffSet+size.height;
 
     return Stack(
       children: <Widget>[
-        const Image(image: AssetImage("Files/Images/DashBoard.jpg")),
+        // const Image(image: AssetImage("Files/Images/DashBoard.jpg"))
+        Container(
+          color: const Color.fromRGBO(44, 47, 51, 1),
+          width: size.width, 
+          height: size.height*1,
+        ),
         Container(
           height: size.height,
           decoration: const BoxDecoration(
@@ -136,7 +146,7 @@ class _HomeState extends State<Home> {
         ),
         Column(
           children: <Widget>[
-            SizedBox(height: size.height*.18,),
+            SizedBox(height: (size.width>1000)?size.height*.1:(size.width>500)?size.height*.02:size.height*.3,),//(size.height<500)?0:size.height*.18,
             Center(
               child: Text(
                 "Agenda\nDigital",
@@ -149,17 +159,17 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _benefits(BuildContext context){
+  Widget _benefits(){
 
-    final size = MediaQuery.of(context).size;
+    _statsOffSet =_benefitsOffSet+((size.width>1100)?size.height:(size.width>500)?size.height*4.3:size.height*1.7);
 
     Widget organization = Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         const SizedBox(height: 20,),
-        Icon(Icons.balance, color: Colors.white, size: (size.width>500)?60:14,),
-        const SizedBox(height: 100,),
+        Icon(Icons.balance, color: Colors.white, size: (size.width>500)?60:45,),
+        SizedBox(height:(size.width>1100)?100:50,),//(size.width>1100)?size.height:size.height*1.7
         Text(
           "Organizacion",
           style: _textStyle
@@ -178,8 +188,8 @@ class _HomeState extends State<Home> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         const SizedBox(height: 20,),
-        Icon(Icons.money_off, color: Colors.white, size: (size.width>500)?60:14,),
-        const SizedBox(height: 100,),
+        Icon(Icons.money_off, color: Colors.white, size: (size.width>500)?60:45,),
+        SizedBox(height:(size.width>1100)?100:50,),
         Text(
           "Software libre",
           style: _textStyle
@@ -198,8 +208,8 @@ class _HomeState extends State<Home> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         const SizedBox(height: 20,),
-        Icon(Icons.devices, color: Colors.white, size: (size.width>500)?60:14,),
-        const SizedBox(height: 100,),
+        Icon(Icons.devices, color: Colors.white, size: (size.width>500)?60:45,),
+        SizedBox(height:(size.width>1100)?100:50,),
         Text(
           "Multiplataforma",
           style: _textStyle,
@@ -218,8 +228,8 @@ class _HomeState extends State<Home> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         const SizedBox(height: 20,),
-        Icon(Icons.document_scanner, color: Colors.white, size: (size.width>500)?60:14,),
-        const SizedBox(height: 100,),
+        Icon(Icons.document_scanner, color: Colors.white, size: (size.width>500)?60:45,),
+        SizedBox(height:(size.width>1100)?100:50,),
         Text(
           "Facil de usar",
           style: _textStyle
@@ -235,22 +245,24 @@ class _HomeState extends State<Home> {
     );
 
     return Container(
-      height: size.height,
+      height: (size.width>1100)?size.height:(size.width>500)?size.height*4.3:size.height*1.7,//
       color: const Color.fromRGBO(44, 47, 51, 1),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
+          SizedBox(height: (size.width>1100)?size.height*.1:(size.width>500)?size.height*.15:size.height*.06),
           Text(
             "¿Que beneficios ofrecemos?", 
             style: _textStyle
           ),
-          Row(
+          Flex(
+            direction: (size.width>1100)?Axis.horizontal:Axis.vertical,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              _container(size.width*.2, size.height*.7, 20, organization),
-              _container(size.width*.2, size.height*.7, 20, freeSoftware),
-              _container(size.width*.2, size.height*.7, 20, multiPlatform),
-              _container(size.width*.2, size.height*.7, 20, easyUsage),
+              _container((size.width>1100 || size.width<500)?273:600, (size.width>1100)?size.height*.7:(size.width>500)?size.height*.9:size.height*.35, 20, organization),
+              _container((size.width>1100 || size.width<500)?273:600, (size.width>1100)?size.height*.7:(size.width>500)?size.height*.9:size.height*.35, 20, freeSoftware),
+              _container((size.width>1100 || size.width<500)?273:600, (size.width>1100)?size.height*.7:(size.width>500)?size.height*.9:size.height*.35, 20, multiPlatform),
+              _container((size.width>1100 || size.width<500)?273:600, (size.width>1100)?size.height*.7:(size.width>500)?size.height*.9:size.height*.35, 20, easyUsage),
             ]
           ),
         ],
@@ -258,115 +270,140 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _stats(BuildContext context){
+  Widget _stats(){
 
-    final size = MediaQuery.of(context).size;
+    _downloadOffSet = _statsOffSet+((size.width>1100 || size.width<500)?size.height:size.height*2.2);
 
-    int usuers = 0;
+    int users = 0;
     int downloads = 0;
     int numberOfRatings = 0;
     double rating = 0;
 
-    Widget data =Column(
+    Widget user = Container(
+      width: (size.width>1100)?180:(size.width>500)?150:100,
+      height: (size.width>1100)?130:(size.width>500)?110:90,
+      margin: const EdgeInsets.all(20),
+      child: Column(//usuarios
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Text(
+            "Usuarios:",
+            style: _textStyle,
+          ),
+          Text(
+            users.toString(),
+            style: _textStyle,
+          )
+        ],
+      ),
+    );
+    Widget download = Container(
+      width: (size.width>1100)?180:(size.width>500)?180:100,
+      height: (size.width>1100)?130:(size.width>500)?110:90,
+      margin: const EdgeInsets.all(20),
+      child: Column(//descargas
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Text(
+            "Descargas:",
+            style: _textStyle,
+          ),
+          Text(
+            downloads.toString(),
+            style: _textStyle,
+          )
+        ],
+      )
+    );
+    Widget noRatings = Container(
+      width: (size.width>1100)?300:(size.width>500)?300:120,
+      height: (size.width>1100)?130:(size.width>500)?110:90,
+      margin: const EdgeInsets.all(20),
+      child: Column(//numero de calificaciones
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Text(
+            "No. Calificaciones:",
+            style: _textStyle,
+          ),
+          Text(
+            numberOfRatings.toString(),
+            style: _textStyle,
+          )
+        ],
+      )
+    );
+    Widget rate = Container(
+      width: (size.width>1100)?200:(size.width>500)?230:100,
+      height: (size.width>1100)?130:(size.width>500)?110:90,
+      margin: const EdgeInsets.all(20),
+      child: Column(//calificacion
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Text(
+            "Calificacion:",
+            style: _textStyle,
+          ),
+          Text(
+            rating.toString(),
+            style: _textStyle,
+          )
+        ],
+      )
+    );
+
+    Widget stats = Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
+        // SizedBox(height: (size.width>1100)?size.height*.1:(size.width>500)?size.height*.15:size.height*.06),
         Text(
           "Estadisticas", 
           style: _textStyle
         ),
-        Row(//estadisticas
+        Flex(
+          direction: (size.width>1100)?Axis.horizontal:Axis.vertical,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "Usuarios:",
-                  style: _textStyle,
-                ),
-                Text(
-                  usuers.toString(),
-                  style: _textStyle,
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "Descargas:",
-                  style: _textStyle,
-                ),
-                Text(
-                  downloads.toString(),
-                  style: _textStyle,
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "N° calificaciones:",
-                  style: _textStyle,
-                ),
-                Text(
-                  numberOfRatings.toString(),
-                  style: _textStyle,
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "Calificacion:",
-                  style: _textStyle,
-                ),
-                Text(
-                  rating.toString()+"/5",
-                  style: _textStyle,
-                ),
-              ],
-            ),
-          ],
+            user,
+            download,
+            noRatings,
+            rate,
+          ]
         ),
-      ]
+      ],
     );
           
     return Container(//fondo oscuro
-      height: size.height,
+      height: (size.width>1100 || size.width<500)?size.height:size.height*2.2,
       color: const Color.fromRGBO(44, 47, 51, 1),
       // padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 100),
       padding: const EdgeInsets.all(100),
-      child: _container(0,1.5, 0, data),
+      child: _container(0,(size.width>1100)?180:(size.width>500)?size.height*.75:size.height*.06, 0, stats),
     );
   }
 
-  Widget _download(BuildContext context){
-
-    final size = MediaQuery.of(context).size;
-
-    
+  Widget _download(){
 
     return Container(
-      height: size.height,
+      height: (size.width>1100)?size.height:(size.width>500)?size.height*5.4:size.height*2.2,//
       color: const Color.fromRGBO(44, 47, 51, 1),
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          SizedBox(height: (size.width>1100)?size.height*.1:(size.width>500)?size.height*.15:size.height*.06),
             Text(
               "Descargas", 
               style: _textStyle
             ),
-            Row(
+            Flex(
+              direction: (size.width>1100)?Axis.horizontal:Axis.vertical,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _container(size.width*.16, size.height*.5, 20, _instalers("Windows", CustomeIcons.windows, "...")),
-                _container(size.width*.16, size.height*.5, 20, _instalers("Linux", CustomeIcons.linux, "...")),
-                _container(size.width*.16, size.height*.5, 20, _instalers("MAC", Icons.apple, "...")),
-                _container(size.width*.16, size.height*.5, 20, _instalers("Android", CustomeIcons.android, "...")),
-                _container(size.width*.16, size.height*.5, 20, _instalers("IOS", Icons.apple, "...")),
+              children: <Widget>[
+                _container((size.width>1100 || size.width<500)?233:600, (size.width>1100)?size.height*.7:(size.width>500)?size.height*.9:size.height*.35, 20, _instalers("Windows", CustomeIcons.windows, "...")),
+                _container((size.width>1100 || size.width<500)?233:600, (size.width>1100)?size.height*.7:(size.width>500)?size.height*.9:size.height*.35, 20,  _instalers("Linux", CustomeIcons.linux, "...")),
+                _container((size.width>1100 || size.width<500)?233:600, (size.width>1100)?size.height*.7:(size.width>500)?size.height*.9:size.height*.35, 20, _instalers("MAC", Icons.apple, "...")),
+                _container((size.width>1100 || size.width<500)?233:600, (size.width>1100)?size.height*.7:(size.width>500)?size.height*.9:size.height*.35, 20, _instalers("Android", CustomeIcons.android, "...")),
+                _container((size.width>1100 || size.width<500)?233:600, (size.width>1100)?size.height*.7:(size.width>500)?size.height*.9:size.height*.35, 20, _instalers("IOS", Icons.apple, "...")),
               ]
             ),
           ]
