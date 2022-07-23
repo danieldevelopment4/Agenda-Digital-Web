@@ -1,6 +1,6 @@
-import 'package:agenda_web/SRC/PrincipalWindow.dart';
+import 'package:agenda_web/SRC/App.dart';
 import 'package:flutter/material.dart';
 
 void main(){
-  runApp(const PrincipalWindows());
+  runApp(const App());
 }
