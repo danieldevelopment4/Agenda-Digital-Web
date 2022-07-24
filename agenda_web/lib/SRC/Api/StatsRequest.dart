@@ -1,41 +1,24 @@
 // ignore_for_file: file_names
 
-import 'dart:convert';
-
 import 'package:agenda_web/SRC/Models/Stats.dart';
 import 'package:http/http.dart' as http;
 
 class StatsRequest {
   
-  Stats? _stats;
-
-  StatsRequest(){
-    request();
-  }
-
-  void request() async {
-    // print("StatsRequest");
-    var url = Uri.parse("https://back-end-agenda-digital.herokuapp.com/stats");
-    Map<String, String> header = {
-      "Accept": "application/json",
-      "content-type": "application/json"
-    };
-    var response = await http.post(
-      url, 
-      headers: header
-    );
-    if (response.statusCode == 200) {
-      // print(response.body);
-      _stats = statsFromJson(response.body);
-    }else{
-      _stats =Stats (noStudens: "...", noDownloads: "...", noCalifications: "...", calification: "...");
-    }
+  Future<Stats> request() async {
+    print("StatsRequest");
+    try{
+      // var url = Uri.parse("http://127.0.0.1:8080/stats");
+      var url = Uri.parse("https://back-end-agenda-digital.herokuapp.com/stats");
+      var response = await http.post(url);
+      if (response.statusCode == 200) {
+        // print(response.body);
+        return statsFromJson(response.body);
+      }
+    }catch(e){}
+    
+    return Stats (noStudens: "...", noDownloads: "...", noCalifications: "...", calification: "...");
 
   }
-
-  Stats get stats{
-    while(_stats==null){}
-    return _stats!;
-  }
-   
+  
 }

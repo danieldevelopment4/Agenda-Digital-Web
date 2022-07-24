@@ -10,6 +10,7 @@ Map<String, IconData> _icon = <String, IconData>{
   "Windows": CustomeIcons.windows,
   "Linux": CustomeIcons.linux,
   "Android": CustomeIcons.android,
+  "...": Icons.error,
 };
 
 

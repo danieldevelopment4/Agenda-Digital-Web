@@ -18,23 +18,16 @@ class Dowloads extends StatefulWidget {
 
 class _DowloadsState extends State<Dowloads> {
 
-  final DownloadRequest _downloadRequest = DownloadRequest();
   late Size size;
   late TextStyle _textStyle;
 
   late Management _management;
-  late List<Download> _downloads;
-
-  void loadStats(){
-    _downloads = _management.downloadRequest();
-  }
 
   @override
   Widget build(BuildContext context) {
     
     size = MediaQuery.of(context).size;
     _management = Provider.of(context);
-    loadStats();
 
     _textStyle = GoogleFonts.robotoCondensed(
       fontSize: (size.width > 500) ? 40 : 15, 
@@ -49,17 +42,29 @@ class _DowloadsState extends State<Dowloads> {
         children: <Widget>[
           SizedBox( height: (size.width > 1100) ? size.height * .1 : (size.width > 500) ? size.height * .15 : size.height * .06),
           Text("Descargas", style: _textStyle),
-          Flex(
-            direction: (size.width > 1100) ? Axis.horizontal : Axis.vertical,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(0)),
-              _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(1)),
-              _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(2)),
-              _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(3)),
-              _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(4)),
-            ]
-          ),
+          FutureBuilder(
+            future: _management.downloadRequest(),
+            builder: (BuildContext context,AsyncSnapshot<List<Download>> snapshot) {
+              if(snapshot.connectionState == ConnectionState.waiting){
+                return const CircularProgressIndicator(
+                  color: Colors.white,
+                  strokeWidth: 7,
+                );
+              }else{
+                return Flex(
+                  direction: (size.width > 1100) ? Axis.horizontal : Axis.vertical,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(snapshot.data![0])),
+                    _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(snapshot.data![1])),
+                    _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(snapshot.data![2])),
+                    _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(snapshot.data![3])),
+                    _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(snapshot.data![4])),
+                  ]
+                );
+              }
+            },
+          )
         ]
       ),
     );
@@ -85,21 +90,21 @@ class _DowloadsState extends State<Dowloads> {
     );
   }
 
-  Widget _instalers(int index) {
+  Widget _instalers(Download download) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        Text(_downloads[index].operativeSystem, style: _textStyle),
-        Icon(getIcon(_downloads[index].operativeSystem), size: 80, color: Colors.white),
-        Text("Estado: \n" + _downloads[index].status, style: _textStyle, textAlign: TextAlign.center,),
+        Text(download.operativeSystem, style: _textStyle),
+        Icon(getIcon(download.operativeSystem), size: 80, color: Colors.white),
+        Text("Estado: \n" + download.status, style: _textStyle, textAlign: TextAlign.center,),
         TextButton(
-          onPressed: () => (_downloads[index].url==null)?null:downloadInstaler(_downloads[index].url!, index),
+          onPressed: () => (download.url==null)?null:downloadInstaler(download.url!, download.id),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Descargar", style: _textStyle),
-              const Icon(
-                Icons.download,
+              Text((download.url==null)?"":"Descargar", style: _textStyle),
+              Icon(
+                (download.url==null)?Icons.do_disturb:Icons.download,
                 color: Colors.white,
               ),
             ],

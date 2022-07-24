@@ -16,13 +16,13 @@ class Management {
   }
 
   //Stats
-  Stats statsRequest() {
-    return _statsRequest.stats;
+  Future<Stats> statsRequest() {
+    return _statsRequest.request();
   }
 
   //Downloads
-  List<Download> downloadRequest() {
-    return _downloadRequest.download;
+  Future<List<Download>> downloadRequest() {
+    return _downloadRequest.request();
   }
 
   void addCounterDownload(index){
