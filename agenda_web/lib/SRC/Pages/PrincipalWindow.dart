@@ -52,7 +52,7 @@ class _PrincipalWindowState extends State<PrincipalWindow> {
 
     
 
-    _list = <Widget>[Home(), Benefits(), Statistics(), Dowloads()];
+    _list = <Widget>[const Home(), const Benefits(), const Statistics(), const Dowloads()];
 
     _scScroll = ScrollController();
 

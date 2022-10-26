@@ -1,13 +1,14 @@
 // ignore_for_file: file_names
 
-import 'package:agenda_web/SRC/Models/Download.dart';
+import 'dart:convert';
+
+import 'package:agenda_web/SRC/Models/DownloadModel.dart';
 
 import 'package:http/http.dart' as http;
 
 class DownloadRequest {
 
-  Future<List<Download>> request() async {
-    print("DownloadRequest");
+  Future<List<DownloadModel>> getDownloadsData() async {
     try{
       // var url = Uri.parse("http://127.0.0.1:8080/download/view");
       var url = Uri.parse("https://back-end-agenda-digital.herokuapp.com/download/view");
@@ -17,8 +18,8 @@ class DownloadRequest {
         return downloadFromJson(response.body);
       }
     }catch(e){}
-    Download download = Download(id: -1, operativeSystem: "...", noDownloads: -1, url: null, status: "...");
-    List<Download> list = List.empty(growable: true);
+    DownloadModel download = DownloadModel(id: -1, operativeSystem: "...", noDownloads: -1, url: null, status: "...");
+    List<DownloadModel> list = List.empty(growable: true);
     list.add(download);
     list.add(download);
     list.add(download);
@@ -29,9 +30,16 @@ class DownloadRequest {
   }
 
   void addCounterDownload(index) async{
-    // var url = Uri.parse("http://127.0.0.1:8080/download/addCounter?id="+index.toString());
-    var url = Uri.parse("https://back-end-agenda-digital.herokuapp.com/download/addCounter?id="+index.toString());
-    await http.post( url);
+    // var url = Uri.parse("http://127.0.0.1:8080/download/addCounter");
+    var url = Uri.parse("https://back-end-agenda-digital.herokuapp.com/download/addCounter");
+    Map<String, String> header = {
+      "Accept": "application/json",
+      "content-type": "application/json"
+    };
+    Map<String, int> body = {
+      "id": index
+    };
+    await http.post( url, body: jsonEncode(body), headers: header );
   }
   
 }

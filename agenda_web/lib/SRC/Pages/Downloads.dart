@@ -1,9 +1,8 @@
 // ignore_for_file: file_names
 
-import 'package:agenda_web/SRC/Api/DownloadRequest.dart';
 import 'package:agenda_web/SRC/Logic/Management.dart';
 import 'package:agenda_web/SRC/Logic/Provider.dart';
-import 'package:agenda_web/SRC/Models/Download.dart';
+import 'package:agenda_web/SRC/Models/DownloadModel.dart';
 import 'package:agenda_web/SRC/Util/iconString.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,6 +33,12 @@ class _DowloadsState extends State<Dowloads> {
       color: Colors.white, 
     );
 
+    List<DownloadModel> downloadsDB = _management.getDownloadData();
+    List<Widget> downloadList = List.empty(growable: true);
+    for (int i = 0; i < downloadsDB.length; i++) {
+      downloadList.add(_container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(downloadsDB[i])),);
+    }
+
     return Container(
       height: (size.width > 1100) ? size.height : (size.width > 500) ? size.height * 5.4 : size.height * 2.2, //
       color: const Color.fromRGBO(44, 47, 51, 1),
@@ -42,32 +47,15 @@ class _DowloadsState extends State<Dowloads> {
         children: <Widget>[
           SizedBox( height: (size.width > 1100) ? size.height * .1 : (size.width > 500) ? size.height * .15 : size.height * .06),
           Text("Descargas", style: _textStyle),
-          FutureBuilder(
-            future: _management.downloadRequest(),
-            builder: (BuildContext context,AsyncSnapshot<List<Download>> snapshot) {
-              if(snapshot.connectionState == ConnectionState.waiting){
-                return const CircularProgressIndicator(
-                  color: Colors.white,
-                  strokeWidth: 7,
-                );
-              }else{
-                return Flex(
-                  direction: (size.width > 1100) ? Axis.horizontal : Axis.vertical,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(snapshot.data![0])),
-                    _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(snapshot.data![1])),
-                    _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(snapshot.data![2])),
-                    _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(snapshot.data![3])),
-                    _container((size.width > 1100 || size.width < 500) ? 233 : 600, (size.width > 1100) ? size.height * .7 : (size.width > 500) ? size.height * .9 : size.height * .35, 20, _instalers(snapshot.data![4])),
-                  ]
-                );
-              }
-            },
+          Flex(
+            direction: (size.width > 1100) ? Axis.horizontal : Axis.vertical,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: downloadList
           )
         ]
       ),
     );
+    
   }
 
   Widget _container(double width, double height, double margin, Widget child, ) {
@@ -90,7 +78,7 @@ class _DowloadsState extends State<Dowloads> {
     );
   }
 
-  Widget _instalers(Download download) {
+  Widget _instalers(DownloadModel download) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[

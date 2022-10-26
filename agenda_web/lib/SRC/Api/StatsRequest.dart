@@ -1,11 +1,11 @@
 // ignore_for_file: file_names
 
-import 'package:agenda_web/SRC/Models/Stats.dart';
+import 'package:agenda_web/SRC/Models/StatsModel.dart';
 import 'package:http/http.dart' as http;
 
 class StatsRequest {
   
-  Future<Stats> request() async {
+  Future<StatsModel> request() async {
     print("StatsRequest");
     try{
       // var url = Uri.parse("http://127.0.0.1:8080/stats");
@@ -17,7 +17,7 @@ class StatsRequest {
       }
     }catch(e){}
     
-    return Stats (noStudens: "...", noDownloads: "...", noCalifications: "...", calification: "...");
+    return StatsModel (noStudens: "...", noDownloads: "...", noCalifications: "...", calification: "...");
 
   }
   

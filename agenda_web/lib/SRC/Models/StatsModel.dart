@@ -2,12 +2,10 @@
 
 import 'dart:convert';
 
-Stats statsFromJson(String str) => Stats.fromJson(json.decode(str));
+StatsModel statsFromJson(String str) => StatsModel.fromJson(json.decode(str));
 
-String statsToJson(Stats data) => json.encode(data.toJson());
-
-class Stats {
-    Stats(
+class StatsModel {
+    StatsModel(
       {
         required this.noStudens,
         required this.noDownloads,
@@ -21,7 +19,7 @@ class Stats {
     final String noCalifications;
     final String calification;
 
-    factory Stats.fromJson(Map<String, dynamic> json) => Stats(
+    factory StatsModel.fromJson(Map<String, dynamic> json) => StatsModel(
       noStudens: json["noStudens"],
       noDownloads: json["noDownloads"],
       noCalifications: json["noCalifications"],

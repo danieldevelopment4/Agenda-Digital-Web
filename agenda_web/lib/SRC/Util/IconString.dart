@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 Map<String, IconData> _icon = <String, IconData>{
 
-  "MACOS": Icons.apple,
+  "Macintosh": Icons.apple,
   "IPhone": Icons.apple,
   "Windows": CustomeIcons.windows,
   "Linux": CustomeIcons.linux,

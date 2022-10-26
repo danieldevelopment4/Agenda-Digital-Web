@@ -2,7 +2,7 @@
 
 import 'package:agenda_web/SRC/Logic/Management.dart';
 import 'package:agenda_web/SRC/Logic/Provider.dart';
-import 'package:agenda_web/SRC/Models/Stats.dart';
+import 'package:agenda_web/SRC/Models/StatsModel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -30,32 +30,21 @@ class _StatisticsState extends State<Statistics> {
       color: Colors.white, 
     );
 
+    StatsModel statsDB = _management.getStatsData();
     Widget stats = Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         // SizedBox(height: (size.width>1100)?size.height*.1:(size.width>500)?size.height*.15:size.height*.06),
         Text("Estadisticas", style: _textStyle),
-        FutureBuilder(
-          future: _management.statsRequest(),
-          builder: (BuildContext context, AsyncSnapshot<Stats> snapshot) {
-            if(snapshot.connectionState == ConnectionState.waiting){
-              return const CircularProgressIndicator(
-                  color: Colors.white,
-                  strokeWidth: 7,
-                );
-            }else{
-              return Flex(
-                direction: (size.width > 1100) ? Axis.horizontal : Axis.vertical,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  _user(snapshot.data!.noStudens),
-                  _download(snapshot.data!.noDownloads),
-                  _noRatings(snapshot.data!.noCalifications),
-                  _rate(snapshot.data!.calification),
-                ]
-              );
-            }
-          },
+        Flex(
+          direction: (size.width > 1100) ? Axis.horizontal : Axis.vertical,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            _user(statsDB.noStudens),
+            _download(statsDB.noDownloads),
+            _noRatings(statsDB.noCalifications),
+            _rate(statsDB.calification),
+          ]
         )
       ],
     );
