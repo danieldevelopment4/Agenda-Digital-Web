@@ -29,8 +29,4 @@ class DownloadModel {
       status: json["status"],
   );
 
-  @override
-  String toString() {
-    return super.toString();
-  }
 }

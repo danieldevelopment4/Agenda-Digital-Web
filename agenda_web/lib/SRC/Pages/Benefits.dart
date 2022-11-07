@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Benefits extends StatefulWidget {
@@ -46,12 +47,12 @@ class _BenefitsState extends State<Benefits> {
         SizedBox(
           height: (size.width > 1100) ? 100 : 50,
         ), //(size.width>1100)?size.height:size.height*1.7
-        Text("Organizacion", style: _textStyle),
+        Text(translate("benefits.organization.name"), style: _textStyle),
         const SizedBox(
           height: 20,
         ),
         Text(
-          "Podras organizar tus horarios de manera eficiente para asi dejar de lado las preocupaciones, combate el deficid de atencion con nuestra modalidad de estudio integrada.\nTe ayudamso a explotar tu potencial",
+          translate("benefits.organization.description"),
           style: _subtextStyle,
           textAlign: TextAlign.center, //Justifica centrado
         ),
@@ -75,12 +76,12 @@ class _BenefitsState extends State<Benefits> {
         SizedBox(
           height: (size.width > 1100) ? 100 : 50,
         ),
-        Text("Software libre", style: _textStyle),
+        Text(translate("benefits.openSource.name"), style: _textStyle),
         const SizedBox(
           height: 20,
         ),
         Text(
-          "Nuestro software siempre sera gratuito, queremos ayudar a todos aquellos que lo necesitan",
+          translate("benefits.openSource.description"),
           style: _subtextStyle,
           textAlign: TextAlign.center, //Justifica centrado
         ),
@@ -105,14 +106,14 @@ class _BenefitsState extends State<Benefits> {
           height: (size.width > 1100) ? 100 : 50,
         ),
         Text(
-          "Multiplataforma",
+          translate("benefits.crossPlatform.name"),
           style: _textStyle,
         ),
         const SizedBox(
           height: 20,
         ),
         Text(
-          "Siendo facil de instalar buscamos apoyarte con tus estudios, por eso estamos listos para asistir desde una computadora o el movil",
+          translate("benefits.crossPlatform.description"),
           style: _subtextStyle,
           textAlign: TextAlign.center, //Justifica centrado
         ),
@@ -136,12 +137,12 @@ class _BenefitsState extends State<Benefits> {
         SizedBox(
           height: (size.width > 1100) ? 100 : 50,
         ),
-        Text("Facil de usar", style: _textStyle),
+        Text(translate("benefits.easyToUse.name"), style: _textStyle),
         const SizedBox(
           height: 20,
         ),
         Text(
-          "Hemos desarrollado la agenda digital con el fin de no enredarte mas la vida, por ello todas nuestras funciones son faciles de aprender a usar, aun asi, si lo deseas puedes consultar nuestra manual de usuario",
+          translate("benefits.easyToUse.description"),
           style: _subtextStyle,
           textAlign: TextAlign.center, //Justifica centrado
         ),
@@ -159,7 +160,7 @@ class _BenefitsState extends State<Benefits> {
         children: <Widget>[
           SizedBox(
             height: (size.width > 1100) ? size.height * .1 : (size.width > 500) ? size.height * .15 : size.height * .06),
-          Text("¿Que beneficios ofrecemos?", style: _textStyle),
+          Text(translate("benefits.header"), style: _textStyle),
           Flex(
             direction: (size.width > 1100) ? Axis.horizontal : Axis.vertical,
             mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -5,6 +5,7 @@ import 'package:agenda_web/SRC/Logic/Provider.dart';
 import 'package:agenda_web/SRC/Models/DownloadModel.dart';
 import 'package:agenda_web/SRC/Util/iconString.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -46,7 +47,7 @@ class _DowloadsState extends State<Dowloads> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           SizedBox( height: (size.width > 1100) ? size.height * .1 : (size.width > 500) ? size.height * .15 : size.height * .06),
-          Text("Descargas", style: _textStyle),
+          Text(translate("downloads.header"), style: _textStyle),
           Flex(
             direction: (size.width > 1100) ? Axis.horizontal : Axis.vertical,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -82,15 +83,15 @@ class _DowloadsState extends State<Dowloads> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        Text(download.operativeSystem, style: _textStyle),
+        Text(translate("downloads.names."+download.operativeSystem), style: _textStyle),
         Icon(getIcon(download.operativeSystem), size: 80, color: Colors.white),
-        Text("Estado: \n" + download.status, style: _textStyle, textAlign: TextAlign.center,),
+        Text(translate("downloads.status.title")+"\n"+ translate("downloads.status."+download.status), style: _textStyle, textAlign: TextAlign.center,),
         TextButton(
           onPressed: () => (download.url==null)?null:downloadInstaler(download.url!, download.id),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text((download.url==null)?"":"Descargar", style: _textStyle),
+              Text((download.url==null)?"":translate("downloads.button"), style: _textStyle),
               Icon(
                 (download.url==null)?Icons.do_disturb:Icons.download,
                 color: Colors.white,
@@ -105,8 +106,9 @@ class _DowloadsState extends State<Dowloads> {
   Future<void> downloadInstaler(String url, int index) async {
     if (!await launchUrl(Uri.parse(url))) {
       throw 'Could not launch $url';
+    }else{
+      _management.addCounterDownload(index);
     }
-    _management.addCounterDownload(index);
   }
 
 }

@@ -1,0 +1,69 @@
+{
+	"menu": {
+		"home": "Home",
+		"benefits": "Benefits",
+		"stats": "Stats",
+		"downloads": "Downloads"
+	},
+	"language": {
+		"title": "Languages",
+		"names": {
+			"en": "English",
+			"es": "Spanish",
+			"fr": "French",
+			"pt": "Portuguese",
+			"de": "Germna",
+			"zh": "Chinese",
+			"ja": "Japanese",
+			"ru": "Russian"
+		}
+	},
+	"home": {
+		"title": "Digital\nAgenda"
+	},
+	"benefits": {
+		"header": "What benefits do we offer?",
+		"organization": {
+			"name": "Organization",
+			"description": "You will be able to organize your schedule in an efficient way so you can leave your worries aside, combat the attention deficit with our integrated study mode.\nWe help you to exploit your potential"
+		},
+		"openSource": {
+			"name": "Open source",
+			"description": "Our software will always be free of charge, we want to help all those who need it."
+		},
+		"crossPlatform": {
+			"name": "Cross platform",
+			"description": "Being easy to install we are looking forward to support you with your studies, that's why we are ready to assist you from a computer or mobile phone."
+		},
+		"easyToUse": {
+			"name": "Easy to use",
+			"description": "We have developed the digital agenda in order not to make your life more complicated, so all our functions are easy to learn to use, however, if you wish you can consult our user manual."
+		}
+	},
+	"stats": {
+		"header": "Stats",
+		"users": "Users:",
+		"downloads": "Downloads:",
+		"noCualifications": "No. Cualifications:",
+		"cualification": "Cualification:"
+	},
+	"downloads": {
+		"header": "Downloads",
+		"names":{
+			"Linux": "Linux",
+			"Windows": "Windows",
+			"Macintosh": "Macintosh",
+			"Android": "Android",
+			"IPhone": "IPhone",
+			"...": "..."
+		},
+		"status":{
+			"title": "State:",
+			"commingSoon": "Comming soon",
+			"development": "In development",
+			"stable": "Stable",
+			"...": "..."
+		},
+		"button": "Download"
+	}
+}

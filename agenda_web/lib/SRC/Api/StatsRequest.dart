@@ -6,18 +6,19 @@ import 'package:http/http.dart' as http;
 class StatsRequest {
   
   Future<StatsModel> request() async {
-    print("StatsRequest");
     try{
-      // var url = Uri.parse("http://127.0.0.1:8080/stats");
-      var url = Uri.parse("https://back-end-agenda-digital.herokuapp.com/stats");
+      var url = Uri.parse("http://127.0.0.1:8090/stats");
+      // var url = Uri.parse("https://back-end-agenda-digital.herokuapp.com/stats");
       var response = await http.post(url);
       if (response.statusCode == 200) {
         // print(response.body);
         return statsFromJson(response.body);
       }
-    }catch(e){}
+    }catch(e){
+      return StatsModel (noStudens: "...", noDownloads: "...", noCalifications: "...", calification: "...");
+    }
+    throw Exception();
     
-    return StatsModel (noStudens: "...", noDownloads: "...", noCalifications: "...", calification: "...");
 
   }
   

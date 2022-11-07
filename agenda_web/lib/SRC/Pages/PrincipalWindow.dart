@@ -5,6 +5,7 @@ import 'package:agenda_web/SRC/Pages/Downloads.dart';
 import 'package:agenda_web/SRC/Pages/Home.dart';
 import 'package:agenda_web/SRC/Pages/Statistics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PrincipalWindow extends StatefulWidget {
@@ -18,21 +19,18 @@ class PrincipalWindow extends StatefulWidget {
 
 class _PrincipalWindowState extends State<PrincipalWindow> {
 
-  late TextStyle _textStyle;
+  late Size size;
 
-  late List<Widget> _list;
+  late TextStyle _textStyle;
+  late TextStyle _subtextStyle;
 
   late ScrollController _scScroll;
-
-  late Size size;
+  final GlobalKey<ScaffoldState> _scaffold = GlobalKey<ScaffoldState>();
 
   late double _homeOffSet;
   late double _benefitsOffSet;
   late double _statsOffSet;
   late double _downloadOffSet;
-
-  
-  
 
   @override
   Widget build(BuildContext context) {
@@ -43,20 +41,19 @@ class _PrincipalWindowState extends State<PrincipalWindow> {
     _statsOffSet = _benefitsOffSet + ((size.width > 1100) ? size.height : (size.width > 500) ? size.height * 4.3 : size.height * 1.7);
     _downloadOffSet = _statsOffSet + ((size.width > 1100 || size.width < 500) ? size.height : size.height * 2.2);
 
-    
-
     _textStyle = GoogleFonts.robotoCondensed(
       fontSize: (size.width > 500) ? 40 : 15, 
       color: Colors.white, 
     );
-
-    
-
-    _list = <Widget>[const Home(), const Benefits(), const Statistics(), const Dowloads()];
+    _subtextStyle = GoogleFonts.robotoCondensed(
+      fontSize: (size.width > 500) ? 25 : 10, 
+      color: Colors.white, 
+    );
 
     _scScroll = ScrollController();
-
     return Scaffold(
+      key: _scaffold,
+      endDrawer: _drawer(),
       body: Stack(
         children: <Widget>[
           _page(),
@@ -75,23 +72,120 @@ class _PrincipalWindowState extends State<PrincipalWindow> {
           // const Image(image: AssetImage("Files/DarkTheme.png")),
           TextButton(
               onPressed: () => _scroll(_homeOffSet),
-              child: Text("Inicio", style: _textStyle)),
+              child: Text(translate("menu.home"), style: _textStyle)),
           TextButton(
               onPressed: () => _scroll(_benefitsOffSet),
-              child: Text("Beneficios", style: _textStyle)),
+              child: Text(translate("menu.benefits"), style: _textStyle)),
           TextButton(
               onPressed: () => _scroll(_statsOffSet),
-              child: Text("Estadisticas", style: _textStyle)),
+              child: Text(translate("menu.stats"), style: _textStyle)),
           TextButton(
               onPressed: () => _scroll(_downloadOffSet),
-              child: Text("Descargas", style: _textStyle)),
+              child: Text(translate("menu.downloads"), style: _textStyle)),
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                _scaffold.currentState!.openEndDrawer();
+              },
               child: Icon(
-                Icons.language,
+                Icons.translate,
                 color: Colors.white,
                 size: (size.width > 500) ? 40 : 15,
               )),
+        ],
+      ),
+    );
+  }
+
+  Widget _drawer(){
+    return Drawer(
+      backgroundColor: const Color.fromRGBO(44, 47, 51, 1),
+      child: Column(
+        children: <Widget>[
+          Text(
+            translate("language.title"),
+            style: _textStyle,
+          ),
+          const Divider(thickness: 1, color: Colors.white,),
+          TextButton(
+            child: Text(
+              translate("language.names.en"),
+              style: _subtextStyle,
+            ),
+            onPressed:(){
+              changeLocale(context, 'en');
+              Navigator.pop(context);
+            }, 
+          ),
+          TextButton(
+            child: Text(
+              translate("language.names.es"),
+              style: _subtextStyle,
+            ),
+            onPressed:(){
+              changeLocale(context, 'es');
+              Navigator.pop(context);
+            }, 
+          ),
+          TextButton(
+            child: Text(
+              translate("language.names.fr"),
+              style: _subtextStyle,
+            ),
+            onPressed:(){
+              changeLocale(context, 'fr');
+              Navigator.pop(context);
+            }, 
+          ),
+          TextButton(
+            child: Text(
+              translate("language.names.pt"),
+              style: _subtextStyle,
+            ),
+            onPressed:(){
+              changeLocale(context, 'pt');
+              Navigator.pop(context);
+            }, 
+          ),
+          TextButton(
+            child: Text(
+              translate("language.names.de"),
+              style: _subtextStyle,
+            ),
+            onPressed:(){
+              changeLocale(context, 'de');
+              Navigator.pop(context);
+            }, 
+          ),
+          TextButton(
+            child: Text(
+              translate("language.names.zh"),
+              style: _subtextStyle,
+            ),
+            onPressed:(){
+              changeLocale(context, 'zh');
+              Navigator.pop(context);
+            }, 
+          ),
+          TextButton(
+            child: Text(
+              translate("language.names.ja"),
+              style: _subtextStyle,
+            ),
+            onPressed:(){
+              changeLocale(context, 'ja');
+              Navigator.pop(context);
+            }, 
+          ),
+          TextButton(
+            child: Text(
+              translate("language.names.ru"),
+              style: _subtextStyle,
+            ),
+            onPressed:(){
+              changeLocale(context, 'ru');
+              Navigator.pop(context);
+            }, 
+          ),
         ],
       ),
     );
@@ -106,11 +200,13 @@ class _PrincipalWindowState extends State<PrincipalWindow> {
   }
 
   Widget _page() {
+    // ignore: prefer_const_constructors
+    List<Widget> pageList = <Widget>[Home(), Benefits(), Statistics(), Dowloads()];
     return ListView.builder(
         controller: _scScroll,
-        itemCount: _list.length,
+        itemCount: pageList.length,
         itemBuilder: (context, index) {
-          return _list[index];
+          return pageList[index];
         });
   }
   

@@ -1,0 +1,69 @@
+{
+	"menu": {
+		"home": "inicio",
+		"benefits": "Beneficios",
+		"stats": "Estadisticas",
+		"downloads": "Descargas"
+	},
+	"language": {
+		"title": "Idiomas",
+		"names": {
+			"en": "Inglés",
+			"es": "Español",
+			"fr": "Francés",
+			"pt": "Portugues",
+			"de": "Aleman",
+			"zh": "Chino",
+			"ja": "Japones",
+			"ru": "Ruso"
+		}
+	},
+	"home": {
+		"title": "Agenda\nDigital"
+	},
+	"benefits": {
+		"header": "¿Que beneficios ofrecemos?",
+		"organization": {
+			"name": "Organizacion",
+			"description": "Podras organizar tus horarios de manera eficiente para asi dejar de lado las preocupaciones, combate el deficid de atencion con nuestra modalidad de estudio integrada.\nTe ayudamso a explotar tu potencial"
+		},
+		"openSource": {
+			"name": "Software libre",
+			"description": "Nuestro software siempre sera gratuito, queremos ayudar a todos aquellos que lo necesitan"
+		},
+		"crossPlatform": {
+			"name": "Multiplataforma",
+			"description": "Siendo facil de instalar buscamos apoyarte con tus estudios, por eso estamos listos para asistir desde una computadora o el movil"
+		},
+		"easyToUse": {
+			"name": "Facil de usar",
+			"description": "Hemos desarrollado la agenda digital con el fin de no enredarte mas la vida, por ello todas nuestras funciones son faciles de aprender a usar, aun asi, si lo deseas puedes consultar nuestra manual de usuario"
+		}
+	},
+	"stats": {
+		"header": "Estadisticas",
+		"users": "Usuarios:",
+		"downloads": "Descargas:",
+		"noCualifications": "No. calificaciones:",
+		"cualification": "Calificacion:"
+	},
+	"downloads": {
+		"header": "Descargas",
+		"names":{
+			"Linux": "Linux",
+			"Windows": "Windows",
+			"Macintosh": "Macintosh",
+			"Android": "Android",
+			"IPhone": "IPhone",
+			"...": "..."
+		},
+		"status":{
+			"title": "Estado:",
+			"commingSoon": "Proximamente",
+			"development": "En desarrollo",
+			"stable": "Estable",
+			"...": "..."
+		},
+		"button": "Descargar"
+	}
+}

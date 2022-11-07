@@ -4,6 +4,7 @@ import 'package:agenda_web/SRC/Logic/Management.dart';
 import 'package:agenda_web/SRC/Logic/Provider.dart';
 import 'package:agenda_web/SRC/Models/StatsModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Statistics extends StatefulWidget {
@@ -35,7 +36,7 @@ class _StatisticsState extends State<Statistics> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         // SizedBox(height: (size.width>1100)?size.height*.1:(size.width>500)?size.height*.15:size.height*.06),
-        Text("Estadisticas", style: _textStyle),
+        Text(translate("stats.header"), style: _textStyle),
         Flex(
           direction: (size.width > 1100) ? Axis.horizontal : Axis.vertical,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -71,7 +72,7 @@ class _StatisticsState extends State<Statistics> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Text(
-            "Usuarios:",
+            translate("stats.users"),
             style: _textStyle,
           ),
           Text(
@@ -93,7 +94,7 @@ class _StatisticsState extends State<Statistics> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Text(
-            "Descargas:",
+            translate("stats.downloads"),
             style: _textStyle,
           ),
           Text(
@@ -115,7 +116,7 @@ class _StatisticsState extends State<Statistics> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Text(
-            "No. Calificaciones:",
+            translate("stats.noCualifications"),
             style: _textStyle,
           ),
           Text(
@@ -137,7 +138,7 @@ class _StatisticsState extends State<Statistics> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Text(
-            "Calificacion:",
+            translate("stats.cualification"),
             style: _textStyle,
           ),
           Text(

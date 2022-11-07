@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatefulWidget {
@@ -51,7 +52,7 @@ class _HomeState extends State<Home> {
               height: (size.width > 1000) ? size.height * .1 : (size.width > 500) ? size.height * .02 : size.height * .3,
             ), //(size.height<500)?0:size.height*.18,
             Center(
-              child: Text("Agenda\nDigital", style: _titleStyle),
+              child: Text(translate("home.title"), style: _titleStyle),
             )
           ],
         )
