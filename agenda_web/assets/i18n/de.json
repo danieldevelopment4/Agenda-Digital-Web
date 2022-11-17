@@ -1,0 +1,69 @@
+{
+	"menu": {
+		"home": "Startseite",
+		"benefits": "Vorteile",
+		"stats": "Statistik",
+		"downloads": "Herunterladen"
+	},
+	"language": {
+		"title": "Sprachen",
+		"names": {
+			"en": "English",
+			"es": "Español",
+			"fr": "Français",
+			"pt": "Português",
+			"de": "Deutsch",
+			"zh": "中国",
+			"ja": "やまと",
+			"ru": "Русский"
+		}
+	},
+	"home": {
+		"title": "Digitale \n Agenda"
+	},
+	"benefits": {
+		"header": "Welche Leistungen bieten wir?",
+		"organization": {
+			"name": "Organisation",
+			"description": "Sie werden in der Lage sein, Ihren Stundenplan effizient zu organisieren, um Ihre Sorgen beiseite zu lassen und das Aufmerksamkeitsdefizit mit unserem integrierten Lernmodus zu bekämpfen.\nWir helfen Ihnen, Ihr Potenzial auszuschöpfen"
+		},
+		"openSource": {
+			"name": "Kostenlose Software",
+			"description": "Unsere Software wird immer kostenlos sein, denn wir wollen all jenen helfen, die sie brauchen."
+		},
+		"crossPlatform": {
+			"name": "Multiplattform",
+			"description": "Da wir einfach zu installieren sind, möchten wir Sie bei Ihrem Studium unterstützen. Deshalb sind wir bereit, Ihnen von einem Computer oder Mobiltelefon aus zu helfen."
+		},
+		"easyToUse": {
+			"name": "Einfach zu bedienen",
+			"description": "Wir haben das digitale Tagebuch entwickelt, um Ihr Leben nicht komplizierter zu machen, deshalb sind alle unsere Funktionen leicht zu erlernen, aber wenn Sie möchten, können Sie unser Benutzerhandbuch konsultieren."
+		}
+	},
+	"stats": {
+		"header": "Statistik",
+		"users": "Benutzer:",
+		"downloads": "Herunterladen:",
+		"noCualifications": "Nr. Bewertungen:",
+		"cualification": "Bewertung:"
+	},
+	"downloads": {
+		"header": "Herunterladen",
+		"names":{
+			"Linux": "Linux",
+			"Windows": "Windows",
+			"Macintosh": "Macintosh",
+			"Android": "Android",
+			"IPhone": "IPhone",
+			"...": "..."
+		},
+		"status":{
+			"title": "Status:",
+			"commingSoon": "Demnächst verfügbar",
+			"development": "In Entwicklung",
+			"stable": "Stabil",
+			"...": "..."
+		},
+		"button": "Herunterladen"
+	}
+}
