@@ -126,66 +126,66 @@ class _PrincipalWindowState extends State<PrincipalWindow> {
               Navigator.pop(context);
             }, 
           ),
-          TextButton(
-            child: Text(
-              translate("language.names.fr"),
-              style: _subtextStyle,
-            ),
-            onPressed:(){
-              changeLocale(context, 'fr');
-              Navigator.pop(context);
-            }, 
-          ),
-          TextButton(
-            child: Text(
-              translate("language.names.pt"),
-              style: _subtextStyle,
-            ),
-            onPressed:(){
-              changeLocale(context, 'pt');
-              Navigator.pop(context);
-            }, 
-          ),
-          TextButton(
-            child: Text(
-              translate("language.names.de"),
-              style: _subtextStyle,
-            ),
-            onPressed:(){
-              changeLocale(context, 'de');
-              Navigator.pop(context);
-            }, 
-          ),
-          TextButton(
-            child: Text(
-              translate("language.names.zh"),
-              style: _subtextStyle,
-            ),
-            onPressed:(){
-              changeLocale(context, 'zh');
-              Navigator.pop(context);
-            }, 
-          ),
-          TextButton(
-            child: Text(
-              translate("language.names.ja"),
-              style: _subtextStyle,
-            ),
-            onPressed:(){
-              changeLocale(context, 'ja');
-              Navigator.pop(context);
-            }, 
-          ),
-          TextButton(
-            child: Text(
-              translate("language.names.ru"),
-              style: _subtextStyle,
-            ),
-            onPressed:(){
-              changeLocale(context, 'ru');
-              Navigator.pop(context);
-            }, 
-          ),
+          // TextButton(
+          //   child: Text(
+          //     translate("language.names.fr"),
+          //     style: _subtextStyle,
+          //   ),
+          //   onPressed:(){
+          //     changeLocale(context, 'fr');
+          //     Navigator.pop(context);
+          //   }, 
+          // ),
+          // TextButton(
+          //   child: Text(
+          //     translate("language.names.pt"),
+          //     style: _subtextStyle,
+          //   ),
+          //   onPressed:(){
+          //     changeLocale(context, 'pt');
+          //     Navigator.pop(context);
+          //   }, 
+          // ),
+          // TextButton(
+          //   child: Text(
+          //     translate("language.names.de"),
+          //     style: _subtextStyle,
+          //   ),
+          //   onPressed:(){
+          //     changeLocale(context, 'de');
+          //     Navigator.pop(context);
+          //   }, 
+          // ),
+          // TextButton(
+          //   child: Text(
+          //     translate("language.names.zh"),
+          //     style: _subtextStyle,
+          //   ),
+          //   onPressed:(){
+          //     changeLocale(context, 'zh');
+          //     Navigator.pop(context);
+          //   }, 
+          // ),
+          // TextButton(
+          //   child: Text(
+          //     translate("language.names.ja"),
+          //     style: _subtextStyle,
+          //   ),
+          //   onPressed:(){
+          //     changeLocale(context, 'ja');
+          //     Navigator.pop(context);
+          //   }, 
+          // ),
+          // TextButton(
+          //   child: Text(
+          //     translate("language.names.ru"),
+          //     style: _subtextStyle,
+          //   ),
+          //   onPressed:(){
+          //     changeLocale(context, 'ru');
+          //     Navigator.pop(context);
+          //   }, 
+          // ),
         ],
       ),
     );

@@ -10,8 +10,8 @@ class DownloadRequest {
 
   Future<List<DownloadModel>> getDownloadsData() async {
     try{
-      var url = Uri.parse("http://127.0.0.1:8090/download/view");
-      // var url = Uri.parse("https://back-end-agenda-digital.herokuapp.com/download/view");
+      // var url = Uri.parse("http://127.0.0.1:8090/download/view");
+      var url = Uri.parse("https://back-end-agenda-digital.herokuapp.com/download/view");
       var response = await http.post( url);
       if (response.statusCode == 200) {
         // print(response.body);
@@ -33,8 +33,8 @@ class DownloadRequest {
 
   void addCounterDownload(index) async{
     try{
-      var url = Uri.parse("http://127.0.0.1:8090/download/addCounter");
-      // var url = Uri.parse("https://back-end-agenda-digital.herokuapp.com/download/addCounter");
+      // var url = Uri.parse("http://127.0.0.1:8090/download/addCounter");
+      var url = Uri.parse("https://back-end-agenda-digital.herokuapp.com/download/addCounter");
       Map<String, String> header = {
         "Accept": "application/json",
         "content-type": "application/json"

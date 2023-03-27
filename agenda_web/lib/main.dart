@@ -8,7 +8,7 @@ void main() async {
   // https://www.science.co.il/language/Codes.php  Codigos de lenguajes
   LocalizationDelegate delegate = await LocalizationDelegate.create(
     basePath: 'i18n',
-    fallbackLocale: 'fr',//lenguaje con el que el aplicativo inicia
+    fallbackLocale: 'en',//lenguaje con el que el aplicativo inicia
     supportedLocales: ['en', 'es', 'fr', 'pt', 'de', 'zh', 'ja', 'ru']
   );
 
